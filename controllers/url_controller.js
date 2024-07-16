@@ -14,9 +14,12 @@ async function handleCreateNewUrl(req, res) {
       shortId: shortID,
       redirectUrl: body.url,
       visitHistory: [],
+      createdBy: req.user._id,
    });
 
-   return res.status(200).json(`https://localhost:8000/url/${shortID}`);
+   return res.render("home", {
+      id: shortID,
+   });
 }
 
 async function handleRedirectUrl(req, res) {
@@ -53,7 +56,6 @@ async function handleAnalytics(req, res) {
       totalClicks: result.visitHistory.length,
       analytics: result.visitHistory,
    });
-
 }
 
 export { handleCreateNewUrl, handleRedirectUrl, handleAnalytics };
