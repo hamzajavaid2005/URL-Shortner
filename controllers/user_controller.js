@@ -1,5 +1,5 @@
 import User from "../models/user_schema.js";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { setUser } from "../services/auth.js";
 
 async function handleUserSignup(req, res) {
@@ -20,9 +20,8 @@ async function handleUserLogin(req, res) {
          error: "invalis user or password",
       });
 
-   const sessionId = uuidv4();
-   setUser(sessionId, user);
-   res.cookie("uid", sessionId);
+   const token = setUser(user);
+   res.cookie("uid", token);
    return res.redirect("/");
 }
 
